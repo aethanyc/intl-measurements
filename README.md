@@ -1,19 +1,20 @@
 # intl-measurements
 Measurements of various intl approaches.
 
-This is a very hacky work-in-progress at the moment. I'll try to accumulate test results between ICU (C++), MozLocale (C++) and Rust `unic-locale` & friends.
+The goal is to measure the performance difference between various reference Internationalization API implementations and ICU4X.
 
 I'll keep this doc with instructions.
 
-# Current results (as of January 9 2020)
+# Current results (as of September 17 2020)
 
 Specs:
-* Macbook Pro 2017
+* Dell XPS 9370 2018, i7-8550U @ 1.8
 
-* **C++**: Clang 12
+* **OS**: Ubuntu 20.04
+* **C++**: GCC 9.3
 * **Rust**: 1.46
-* **ICU4C**: 67
-* **ICU4X**: icu4x 0.1
+* **ICU4C**: 66.1
+* **ICU4X**: 0.1
 
 Sample: 956 locale strings provided to MozLocale constructor during fresh-profile startup of Firefox Nightly on Oct 21st 2019.
 
@@ -21,12 +22,12 @@ Sample: 956 locale strings provided to MozLocale constructor during fresh-profil
 |                    Test                      |   ICU4C   |    ICU4X  |  Difference |
 | -------------------------------------------: | --------: | --------: | ----------: |
 | **Locale**  | | | |
-| Construct an instance from a string          |    289 us |     33 us |     -88.58% |
-| Matching all locales against `en-US`         |  11669 ns |   2085 us |     -82.13% |
-| Serializing all locales to a string          |   1160 us |    165 us |     -85.78% |
+| Construct an instance from a string          |    284 us |     33 us |     -88.38% |
+| Matching all locales against `en-US`         |  10095 ns |   2085 us |     -79.35% |
+| Serializing all locales to a string          |   1186 us |    165 us |     -86.09% |
 | Measuring memory allocation of all instances |  229376 b |   30592 b |     -86.66% |
 | **PluralRules**  | | | |
-|Select 31 numbers for 10 locales              | 481130 ns | 285701 ns |     -40.62% |
+|Select 31 numbers for 10 locales              |  421.1 us |  145.1 us |     -65.54% |
 
 
 # How to run
