@@ -1,0 +1,10 @@
+[package]
+name = "pluralrules-test"
+version = "0.1.0"
+authors = ["Zibi Braniecki <zibi@braniecki.net>"]
+edition = "2018"
+
+[dependencies]
+icu-locale = { path = "../../../icu4x/components/locale" }
+icu-pluralrules = { path = "../../../icu4x/components/pluralrules" }
+icu-fs-data-provider = { path = "../../../icu4x/components/fs-data-provider" }
